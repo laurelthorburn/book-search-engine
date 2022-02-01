@@ -1,25 +1,35 @@
-const { Thought } = require('../models');
+//define the query and mutation functionality to work with the mongoose models
+// use the functionality in the user-controller.js as a guide
+// in models there is both a User and a Book
+
+const { User } = require('../models');
+// didnt call Book because Book is a subdocument of the User
+
+//need the following: 1. createUser (DONE), 2. getSingleUser (DONE), 3. saveBook (MAYBE DONE), 4. deleteBook (DONE), 5. login (HOW AND WHERE)
+
 
 const resolvers = {
   Query: {
-    thoughts: async () => {
-      return Thought.find().sort({ createdAt: -1 });
-    },
-
-    thought: async (parent, { thoughtId }) => {
-      return Thought.findOne({ _id: thoughtId });
+    // books: async () => {
+    //   return Book.find().sort({ createdAt: -1 });
+    // },
+//getSingleUser
+    user: async (parent, { userId }) => {
+      return User.findOne({ _id: userId });
     },
   },
 
   Mutation: {
-    addThought: async (parent, { thoughtText, thoughtAuthor }) => {
-      return Thought.create({ thoughtText, thoughtAuthor });
+    //createUser
+    createUser: async (parent, { username, email, password }) => {
+      return User.create({ username, email, password });
     },
-    addComment: async (parent, { thoughtId, commentText }) => {
-      return Thought.findOneAndUpdate(
-        { _id: thoughtId },
+    //saveBook
+    saveBook: async (parent, { bookId, authors, description, image, link, title }) => {
+      return User.findOneAndUpdate(
+        { _id: userId },
         {
-          $addToSet: { comments: { commentText } },
+          $addToSet: { bookId: { _id } },
         },
         {
           new: true,
@@ -27,17 +37,20 @@ const resolvers = {
         }
       );
     },
-    removeThought: async (parent, { thoughtId }) => {
-      return Thought.findOneAndDelete({ _id: thoughtId });
-    },
-    removeComment: async (parent, { thoughtId, commentId }) => {
-      return Thought.findOneAndUpdate(
-        { _id: thoughtId },
-        { $pull: { comments: { _id: commentId } } },
+    // deleteBook: async (parent, { thoughtId }) => {
+    //   return Thought.findOneAndDelete({ _id: thoughtId });
+    // },
+    //deleteBook
+    deleteBook: async (parent, { userId, bookId }) => {
+      return User.findOneAndUpdate(
+        { _id: userId },
+        { $pull: { savedBooks: { _id: bookId } } },
         { new: true }
       );
     },
   },
 };
+
+//NEED LOGIN
 
 module.exports = resolvers;
