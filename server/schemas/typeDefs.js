@@ -11,7 +11,6 @@ const typeDefs = gql`
     savedBooks: [Book]
   }
 
-//how do i do an array of strings
   type Book {
     _id: ID!
     authors: [String]
@@ -22,17 +21,30 @@ const typeDefs = gql`
   }
 
   type Auth {
-    token: [Thought]!
+    token: [User]!
     user: User
   }
 
-  type Mutation {
-    login(email: String!, password: String!): Auth
-    addUser(username: String!, email: String!, password: String!): Auth
-    saveBook(authors: [authors]!, description: String!, title: String!, bookId: ID!, image: String!, link: : String!): User
-    removeBook(bookId: ID!): User
+  type Query {
+    users: [User]
+    user(username: String!): User
+    books(username: String): [Book]
+    me: User
   }
+
+  type Mutation {
+  createUser(username: String!, email: String!, password: String!): Auth
+  saveBook(authors: [authors], description: String, title: String, bookId: ID!, image: String, link: : String!): User
+  removeBook(bookId: ID!): User
+}
+
 `;
 
 module.exports = typeDefs;
 
+// type Mutation {
+//   login(email: String!, password: String!): Auth
+  // addUser(username: String!, email: String!, password: String!): Auth
+  // saveBook(authors: [authors]!, description: String!, title: String!, bookId: ID!, image: String!, link: : String!): User
+//   removeBook(bookId: ID!): User
+// }

@@ -10,9 +10,9 @@ const { User } = require('../models');
 
 const resolvers = {
   Query: {
-    // books: async () => {
-    //   return Book.find().sort({ createdAt: -1 });
-    // },
+    books: async () => {
+      return Book.find().sort({ createdAt: -1 });
+    },
 //getSingleUser
     user: async (parent, { userId }) => {
       return User.findOne({ _id: userId });
