@@ -27,26 +27,29 @@ const resolvers = {
     },
 
     //saveBook
-    saveBook: async (parent, { bookId, authors, description, image, link, title }) => {
-      return User.findOneAndUpdate(
-        { _id: userId },
+    saveBook: async (parent, { bookData }, context) => {
+      if(context.user){
+      return await User.findOneAndUpdate(
+        { _id: context.user._id },
         {
-          $addToSet: { bookId: { _id } },
+          $addToSet: { savedBooks: bookData },
         },
         {
           new: true,
-          runValidators: true,
         }
       );
+      }
     },
 
     //deleteBook
-    deleteBook: async (parent, { userId, bookId }) => {
-      return User.findOneAndUpdate(
-        { _id: userId },
-        { $pull: { savedBooks: { _id: bookId } } },
+    deleteBook: async (parent, { bookId }, context) => {
+      if(context.user){
+      return await User.findOneAndUpdate(
+        { _id: context.user._id },
+        { $pull: { savedBooks: { bookId } } },
         { new: true }
       );
+      }
     },
 
 //login user
