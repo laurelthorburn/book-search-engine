@@ -6,10 +6,26 @@ import Navbar from './components/Navbar';
 
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 
+// import { ApolloProvider } from '@apollo/react-hooks';
+// import ApolloClient from 'apollo-boost';
+
 const client = new ApolloClient({
   uri: '/graphql',
   cache: new InMemoryCache(),
 });
+
+// const client = new ApolloClient({
+//   request: (operation) => {
+//     const token = localStorage.getItem('id_token');
+
+//     operation.setContext({
+//       headers: {
+//         authorization: token ? `Bearer ${token}` : '',
+//       },
+//     });
+//   },
+//   uri: '/graphql',
+// });
 
 function App() {
   return (
