@@ -19,6 +19,8 @@ const startServer = async () => {
     resolvers,
     context: authMiddleware 
   });
+  await server.start();
+  server.applyMiddleware({app});
 }
 
 app.use(express.urlencoded({ extended: true })); //true or false?
