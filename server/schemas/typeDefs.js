@@ -14,7 +14,7 @@ const typeDefs = gql`
   type Book {
     bookId: ID!
     authors: [String]
-    description: String
+    description: String!
     title: String!
     image: String
     link: String
@@ -36,8 +36,9 @@ const typeDefs = gql`
 
   input BookInput {
   authors: [String]
-  description: String
-  title: String
+  description: String!
+  title: String!
+  #should bookId really be a string on ID?
   bookId: ID!
   image: String
   link: String
