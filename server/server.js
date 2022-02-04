@@ -21,6 +21,7 @@ const startServer = async () => {
   });
   await server.start();
   server.applyMiddleware({app});
+  console.log("Connected to playground, have fun 👶🏽");
 }
 
 app.use(express.urlencoded({ extended: true })); //true or false?
