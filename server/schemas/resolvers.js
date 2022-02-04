@@ -14,7 +14,7 @@ const resolvers = {
       return Book.find().sort({ createdAt: -1 });
     },
 //getSingleUser
-    user: async (parent, { userId }) => {
+    me: async (parent, args, context) => {
       return User.findOne({ _id: userId });
     },
   },

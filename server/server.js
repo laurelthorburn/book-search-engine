@@ -11,10 +11,12 @@ const PORT = process.env.PORT || 3001;
 const app = express();
 
 //new ApolloServer, uses typeDefs & resolvers we required above
-const server = new ApolloServer({
-  typeDefs,
-  resolvers,
-});
+const startServer = async () => {
+  const server = new ApolloServer({
+    typeDefs,
+    resolvers,
+  });
+}
 
 app.use(express.urlencoded({ extended: true })); //true or false?
 app.use(express.json());
