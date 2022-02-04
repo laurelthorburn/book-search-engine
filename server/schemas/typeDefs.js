@@ -35,8 +35,8 @@ const typeDefs = gql`
   authors: [String]
   description: String!
   title: String!
-  #should bookId really be a string on ID?
-  bookId: ID!
+  #should bookId really be a string or an ID?
+  bookId: String!
   image: String
   link: String
 }
