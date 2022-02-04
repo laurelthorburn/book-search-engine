@@ -4,15 +4,14 @@
 
 const { User } = require('../models');
 // didnt call Book because Book is a subdocument of the User
+const { AuthenticationError } = require('apollo-server-express');
+const { signToken } = require('../utils/auth');
 
 //need the following: 1. createUser (DONE), 2. getSingleUser (DONE), 3. saveBook (MAYBE DONE), 4. deleteBook (DONE), 5. login (HOW AND WHERE)
 
 
 const resolvers = {
   Query: {
-    books: async () => {
-      return Book.find().sort({ createdAt: -1 });
-    },
 //getSingleUser
     me: async (parent, args, context) => {
       return User.findOne({ _id: userId });
