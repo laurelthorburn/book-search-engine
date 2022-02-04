@@ -21,8 +21,11 @@ const resolvers = {
   Mutation: {
     //createUser
     createUser: async (parent, { username, email, password }) => {
-      return User.create({ username, email, password });
+      const user = await User.create({ username, email, password });
+      const token = signToken(user);
+      return { token, user };
     },
+
     //saveBook
     saveBook: async (parent, { bookId, authors, description, image, link, title }) => {
       return User.findOneAndUpdate(
@@ -36,9 +39,7 @@ const resolvers = {
         }
       );
     },
-    // deleteBook: async (parent, { thoughtId }) => {
-    //   return Thought.findOneAndDelete({ _id: thoughtId });
-    // },
+
     //deleteBook
     deleteBook: async (parent, { userId, bookId }) => {
       return User.findOneAndUpdate(
@@ -47,6 +48,7 @@ const resolvers = {
         { new: true }
       );
     },
+
 //login user
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
