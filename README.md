@@ -68,7 +68,7 @@ THEN I am logged out of the site and presented with a menu with the options Sear
 ## Installation
 * Clone the repository using:
 ```
-git clone https://github.com/laurelthorburn/Laurel-Thorburn-Portfolio.git
+git clone https://github.com/laurelthorburn/book-search-engine
 ```
 * Ensure you are in the current working directory
 * Install dependencies by opening the terminal (ctrl + j on windows) and running:
@@ -121,17 +121,17 @@ No tests at this time
 
   <a name="picsection"></a>
   ## Screenshots
-  ![Screenshot of About Page](./src/media/screenshot1.png)
-  ![Screenshot of Portfolio Page](./src/media/screenshot2.png)
-  ![Screenshot of Contact Page](./src/media/screenshot3.png)
-  ![Screenshot of Resume Page](./src/media/screenshot4.png)
+  ![Screenshot of Main Page](./src/media/screenshot1.png)
+  ![Screenshot of Sign Up Page](./src/media/screenshot2.png)
+  ![Screenshot of My Page](./src/media/screenshot3.png)
+
 
   <a name="linksection"></a>
   ## Links
 
-  Deployed Github Site: https://laurelthorburn.github.io/Laurel-Thorburn-Portfolio/
+  Deployed Heroku Site: Coming soon...
   
-  Github Site: https://github.com/laurelthorburn/Laurel-Thorburn-Portfolio
+  Github Site: https://github.com/laurelthorburn/book-search-engine
 
   <a name="creditsection"></a>
 ## Resources/Credit
