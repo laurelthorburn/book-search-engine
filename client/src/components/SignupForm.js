@@ -42,7 +42,7 @@ const [createUser, {data, error, loading}] = useMutation(ADD_USER);
 
       // const { token, user } = await response.json();
       // console.log(user);
-      Auth.login(token);
+      Auth.login(response.token);
     } catch (err) {
       console.error(err);
       setShowAlert(true);
