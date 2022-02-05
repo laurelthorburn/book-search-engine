@@ -1,22 +1,32 @@
 import { gql } from '@apollo/client';
 
 export const ADD_USER = gql`
-  mutation createUser($userId: ID!, $username: String!, $email: String!, $password: String!) {
+  mutation createUser($username: String!, $email: String!, $password: String!) {
     createUser(username: $username, email: $email, password: $password) {
       token
-      User {
+      user {
         _id
         username
       }
     }
   }
 `;
-
+// why BookInput? Remember your typeDefs mutation values...
 export const SAVE_BOOK = gql`
-  mutation saveBook($bookId: ID!, $authors: String, $description: String, $title: String, $image: String, $link: String) {
-    saveBook(userId: $userId) {
+  mutation saveBook($bookData: BookInput!) {
+    saveBook(bookData: $bookData) {
       _id
       username
+      email
+      password
+      savedBooks {
+        bookId
+        authors
+        description
+        title
+        image
+        link
+      }
     }
   }
 `;
@@ -34,11 +44,20 @@ export const LOGIN_USER = gql`
 `;
 
 export const REMOVE_BOOK = gql`
-  mutation removeBook($bookId: ID!) {
-    removeBook(book: $bookId) {
+  mutation deleteBook($bookId: ID!) {
+    deleteBook(bookId: $bookId) {
       _id
-      name
-      books
+      username
+      email
+      password
+      savedBooks {
+        bookId
+        authors
+        description
+        title
+        image
+        link
+      }
     }
   }
 `;
