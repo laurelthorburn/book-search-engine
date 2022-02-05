@@ -1,9 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Jumbotron, Container, CardColumns, Card, Button } from 'react-bootstrap';
 
 import { useQuery, useMutation } from '@apollo/client';
-
-// import { useQuery, useMutation } from '@apollo/react-hooks';
 
 import Auth from '../utils/auth';
 import { removeBookId } from '../utils/localStorage';
@@ -21,7 +19,7 @@ const SavedBooks = () => {
 
   //omg i didn't add the freaking deleteBook... no wonder it hates me
 
-  const [deleteBook, {error}] =useMutation(REMOVE_BOOK);
+  const [deleteBook, {error}] = useMutation(REMOVE_BOOK);
 
   console.log(error)
 
@@ -29,6 +27,8 @@ const SavedBooks = () => {
 
   // use this to determine if `useEffect()` hook needs to run again
   const userDataLength = Object.keys(userData).length;
+
+  console.log(userDataLength);
 
   // useEffect(() => {
   //   const getUserData = async () => {
@@ -67,7 +67,7 @@ const SavedBooks = () => {
       const { data } = await deleteBook({
         variables: { bookId },
       });
-
+      console.log({data});
       // if (!response.ok) {
       //   throw new Error('something went wrong!');
       // }
@@ -83,7 +83,7 @@ const SavedBooks = () => {
 
   // if data isn't here yet, say so
   if (loading) {
-    return <h2>LOADING...⏱️</h2>;
+    return <h2>LOADING...hold on...</h2>;
   }
 
   return (
