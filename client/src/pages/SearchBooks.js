@@ -35,7 +35,15 @@ const SearchBooks = () => {
     }
 
     try {
-      const response = await searchGoogleBooks(searchInput);
+      //error: 'searchGoogleBooks' is not defined  no-undef ... what is a work around? where was searchGoogleBooks defined???
+      // reviewed old code, was getting pulled from ..utils/API that I deleted
+      //// make a search to google books api
+// https://www.googleapis.com/books/v1/volumes?q=harry+potter
+// export const searchGoogleBooks = (query) => {
+//   return fetch(`https://www.googleapis.com/books/v1/volumes?q=${query}`);
+//what if i sub query for searchInput
+// };
+      const response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${searchInput}`);;
 
       if (!response.ok) {
         throw new Error('something went wrong!');
