@@ -13,7 +13,9 @@ import { REMOVE_BOOK } from '../utils/mutations';
 const SavedBooks = () => {
   // Instead, use the userQuery() Hook to execute the GET_ME query on load and save it to a variable named userData
   //do i need to break this down further?! Error: doesn't like that I called it UserData, "Parsing error: Identifier 'userData' has already been declared."
-  const [userData, {error}] = useQuery(GET_ME); 
+  const [userData, {data, loading, error}] = useQuery(GET_ME); 
+
+  console.log(data)
 
   // const [userData, setUserData] = useState({});
 
@@ -72,7 +74,7 @@ const SavedBooks = () => {
   };
 
   // if data isn't here yet, say so
-  if (!userDataLength) {
+  if (loading) {
     return <h2>LOADING...⏱️</h2>;
   }
 

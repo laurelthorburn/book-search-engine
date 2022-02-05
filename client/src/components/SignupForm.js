@@ -13,7 +13,8 @@ const SignupForm = () => {
   const [showAlert, setShowAlert] = useState(false);
 
   //Replace the addUser() functionality imported from teh API file with ADD_USER mutation functionality
-const createUser = useMutation(ADD_USER);
+  //do i need all these things, what all do i need? why can't i console log them WAH
+const [createUser, {data, error, loading}] = useMutation(ADD_USER);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -31,7 +32,7 @@ const createUser = useMutation(ADD_USER);
     }
 
     try {
-      const response = await addUser({
+      const response = await createUser({
         variables: { ...userFormData },
       });
 
