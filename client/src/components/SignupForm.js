@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation } from '@apollo/client';
 import { ADD_USER } from '../utils/mutations';
 import Auth from '../utils/auth';
 
@@ -14,7 +14,7 @@ const SignupForm = () => {
 
   //Replace the addUser() functionality imported from teh API file with ADD_USER mutation functionality
   //do i need all these things, what all do i need? why can't i console log them WAH
-const [createUser, {data, error, loading}] = useMutation(ADD_USER);
+const [createUser] = useMutation(ADD_USER);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -32,7 +32,7 @@ const [createUser, {data, error, loading}] = useMutation(ADD_USER);
     }
 
     try {
-      const response = await createUser({
+      const { data } = await createUser({
         variables: { ...userFormData },
       });
 
@@ -42,7 +42,7 @@ const [createUser, {data, error, loading}] = useMutation(ADD_USER);
 
       // const { token, user } = await response.json();
       // console.log(user);
-      Auth.login(response.token);
+      Auth.login(data.user.token);
     } catch (err) {
       console.error(err);
       setShowAlert(true);

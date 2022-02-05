@@ -3,6 +3,8 @@ import { Jumbotron, Container, CardColumns, Card, Button } from 'react-bootstrap
 
 import { useQuery, useMutation } from '@apollo/client';
 
+// import { useQuery, useMutation } from '@apollo/react-hooks';
+
 import Auth from '../utils/auth';
 import { removeBookId } from '../utils/localStorage';
 
@@ -13,9 +15,15 @@ import { REMOVE_BOOK } from '../utils/mutations';
 const SavedBooks = () => {
   // Instead, use the userQuery() Hook to execute the GET_ME query on load and save it to a variable named userData
   //do i need to break this down further?! Error: doesn't like that I called it UserData, "Parsing error: Identifier 'userData' has already been declared."
-  const [userData, {data, loading, error}] = useQuery(GET_ME); 
+  const [userData, {data, loading }] = useQuery(GET_ME); 
 
   console.log(data)
+
+  //omg i didn't add the freaking deleteBook... no wonder it hates me
+
+  const [deleteBook, {error}] =useMutation(REMOVE_BOOK);
+
+  console.log(error)
 
   // const [userData, setUserData] = useState({});
 

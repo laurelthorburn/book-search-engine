@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
 
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../utils/mutations';
 import Auth from '../utils/auth';
 
@@ -11,7 +11,7 @@ const LoginForm = () => {
   const [validated] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
 
-  const [login, {data, error, loading}] = useMutation(LOGIN_USER);
+  const [login, {data}] = useMutation(LOGIN_USER);
 
   console.log(data);
 
@@ -31,18 +31,19 @@ const LoginForm = () => {
     }
 
     try {
-      const response = await login({
+      const { data } = await login({
         variables: { ...userFormData },
       });
 
-      console.log(response);
+      console.log(data);
       // if (!response.ok) {
       //   throw new Error('something went wrong!');
       // }
 
       // const { token, user } = await response.json();
       // console.log(user);
-      Auth.login(response.token);
+      //confirm flow is ok
+      Auth.login(data.user.token);
     } catch (err) {
       console.error(err);
       setShowAlert(true);
