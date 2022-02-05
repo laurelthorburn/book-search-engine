@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Jumbotron, Container, Col, Form, Button, Card, CardColumns } from 'react-bootstrap';
-import { GET_ME } from '../utils/queries';
+import { SAVE_BOOK } from '../utils/mutations';
 
 import Auth from '../utils/auth';
 import { saveBookIds, getSavedBookIds } from '../utils/localStorage';
@@ -37,6 +37,8 @@ const SearchBooks = () => {
 
       const { items } = await response.json();
 
+      //they call it bookData
+
       const bookData = items.map((book) => ({
         bookId: book.id,
         authors: book.volumeInfo.authors || ['No author to display'],
@@ -63,13 +65,15 @@ const SearchBooks = () => {
     if (!token) {
       return false;
     }
-
+//try catch block to work within, use spread & pass into bookData how to pass token tho?
     try {
-      const response = await saveBook(bookToSave, token);
+      const response = await saveBook({
+        variables: { bookData: { ...bookToSave } },
+      });
 
-      if (!response.ok) {
-        throw new Error('something went wrong!');
-      }
+      // if (!response.ok) {
+      //   throw new Error('something went wrong!');
+      // }
 
       // if book successfully saves to user's account, save book id to state
       setSavedBookIds([...savedBookIds, bookToSave.bookId]);
