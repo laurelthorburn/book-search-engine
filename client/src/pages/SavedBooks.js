@@ -1,19 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { Jumbotron, Container, CardColumns, Card, Button } from 'react-bootstrap';
 
+import { useQuery, useMutation } from '@apollo/client';
+
 import Auth from '../utils/auth';
 import { removeBookId } from '../utils/localStorage';
 
-import { GET } from '../utils/queries';
+import { GET_ME } from '../utils/queries';
 import { REMOVE_BOOK } from '../utils/mutations';
 
 
 const SavedBooks = () => {
   // Instead, use the userQuery() Hook to execute the GET_ME query on load and save it to a variable named userData
-  //do i need to break this down further?!
-  const userData = useQuery(GET_ME); 
+  //do i need to break this down further?! Error: doesn't like that I called it UserData, "Parsing error: Identifier 'userData' has already been declared."
+  const [userData, {error}] = useQuery(GET_ME); 
 
-  const [userData, setUserData] = useState({});
+  // const [userData, setUserData] = useState({});
 
   // use this to determine if `useEffect()` hook needs to run again
   const userDataLength = Object.keys(userData).length;
