@@ -4,13 +4,14 @@ import { Jumbotron, Container, CardColumns, Card, Button } from 'react-bootstrap
 import Auth from '../utils/auth';
 import { removeBookId } from '../utils/localStorage';
 
-import { QUERY_ME } from '../utils/queries';
+import { GET } from '../utils/queries';
 import { REMOVE_BOOK } from '../utils/mutations';
 
 
 const SavedBooks = () => {
   // Instead, use the userQuery() Hook to execute the GET_ME query on load and save it to a variable named userData
-  const userData = useQuery(QUERY_ME); 
+  //do i need to break this down further?!
+  const userData = useQuery(GET_ME); 
 
   const [userData, setUserData] = useState({});
 
@@ -70,7 +71,7 @@ const SavedBooks = () => {
 
   // if data isn't here yet, say so
   if (!userDataLength) {
-    return <h2>LOADING...</h2>;
+    return <h2>LOADING...⏱️</h2>;
   }
 
   return (
