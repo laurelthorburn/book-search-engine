@@ -18,7 +18,6 @@ const [createUser, { data, error }] = useMutation(ADD_USER);
 
 console.log(data);
 
-//why am i getting an error when i try to sing up??
 
 useEffect(() => {
   error ? setShowAlert(true) : setShowAlert(false);
