@@ -8,17 +8,12 @@ import { removeBookId, saveBookIds } from '../utils/localStorage';
 
 const SavedBooks = () => {
   const {loading, data } = useQuery(GET_ME); 
-  const [deleteBook, {error}] = useMutation(REMOVE_BOOK);
-
-  console.log(`I am the query, why am I undefined? ${GET_ME}`)
-
-
-  console.log(`I am the data, why am I undefined? ${data}`)
-
   const userData = data?.me || [];
 
-  console.log(`I am the userdata, why am I undefined? ${userData}`)
+  console.log(`I am the userdata, why am I undefined? ${userData} ????`)
 
+
+  const [deleteBook, {error}] = useMutation(REMOVE_BOOK);
   // const userDataLength = Object.keys(userData).length;
   // create function that accepts the book's mongo _id value as param and deletes the book from the database
   const handleDeleteBook = async (bookId) => {
