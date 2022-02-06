@@ -36,14 +36,7 @@ const SearchBooks = () => {
     }
 
     try {
-      //error: 'searchGoogleBooks' is not defined  no-undef ... what is a work around? where was searchGoogleBooks defined???
-      // reviewed old code, was getting pulled from ..utils/API that I deleted
-      //// make a search to google books api
-// https://www.googleapis.com/books/v1/volumes?q=harry+potter
-// export const searchGoogleBooks = (query) => {
-//   return fetch(`https://www.googleapis.com/books/v1/volumes?q=${query}`);
-//what if i sub query for searchInput
-// };
+
       const response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${searchInput}`);
 
       if (!response.ok) {
@@ -82,13 +75,9 @@ const SearchBooks = () => {
     }
 //try catch block to work within, use spread & pass into bookData how to pass token tho?
     try {
-      const response = await saveBook({
+      const {data} = await saveBook({
         variables: { bookData: { ...bookToSave } },
       });
-      console.log(response);
-      // if (!response.ok) {
-      //   throw new Error('something went wrong!');
-      // }
 
       // if book successfully saves to user's account, save book id to state
       setSavedBookIds([...savedBookIds, bookToSave.bookId]);

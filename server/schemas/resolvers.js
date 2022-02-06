@@ -1,20 +1,18 @@
-//define the query and mutation functionality to work with the mongoose models
-// use the functionality in the user-controller.js as a guide
-// in models there is both a User and a Book
-
 const { User } = require('../models');
-// didnt call Book because Book is a subdocument of the User
 const { AuthenticationError } = require('apollo-server-express');
 const { signToken } = require('../utils/auth');
-
-//need the following: 1. createUser (DONE), 2. getSingleUser (DONE), 3. saveBook (MAYBE DONE), 4. deleteBook (DONE), 5. login (HOW AND WHERE)
-
 
 const resolvers = {
   Query: {
 //getSingleUser
     me: async (parent, args, context) => {
-      return User.findOne({ _id: userId });
+      if (context.user) {
+        const userData = await User.findOne({ _id: context.user._id }).select(
+          "-__v -password"
+        );
+        return userData;
+      }
+      throw new AuthenticationError("Apologies but you are not logged in");
     },
   },
 
@@ -31,12 +29,8 @@ const resolvers = {
       if(context.user){
       return await User.findOneAndUpdate(
         { _id: context.user._id },
-        {
-          $addToSet: { savedBooks: bookData },
-        },
-        {
-          new: true,
-        }
+        { $addToSet: { savedBooks: bookData }},
+        { new: true, runValidators: true}
       );
       }
     },
@@ -46,7 +40,7 @@ const resolvers = {
       if(context.user){
       return await User.findOneAndUpdate(
         { _id: context.user._id },
-        { $pull: { savedBooks: { bookId } } },
+        { $pull: { savedBooks: { bookId: bookId } } },
         { new: true }
       );
       }
@@ -57,13 +51,13 @@ const resolvers = {
       const user = await User.findOne({ email });
 
       if (!user) {
-        throw new AuthenticationError('No user with this email found!');
+        throw new AuthenticationError('No user found!');
       }
 
       const correctPw = await user.isCorrectPassword(password);
 
       if (!correctPw) {
-        throw new AuthenticationError('Incorrect password!');
+        throw new AuthenticationError('Nope, try again');
       }
 
       const token = signToken(user);
