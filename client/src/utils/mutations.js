@@ -1,5 +1,4 @@
 import { gql } from '@apollo/client';
-// import { gql } from '@apollo/react-hooks';
 
 export const ADD_USER = gql`
   mutation createUser($username: String!, $email: String!, $password: String!) {
@@ -18,8 +17,7 @@ export const SAVE_BOOK = gql`
     saveBook(bookData: $bookData) {
       _id
       username
-      email
-      password
+      bookCount
       savedBooks {
         bookId
         authors
@@ -45,12 +43,11 @@ export const LOGIN_USER = gql`
 `;
 
 export const REMOVE_BOOK = gql`
-  mutation deleteBook($bookId: ID!) {
+  mutation deleteBook($bookId: String!) {
     deleteBook(bookId: $bookId) {
       _id
       username
-      email
-      password
+      bookCount
       savedBooks {
         bookId
         authors
