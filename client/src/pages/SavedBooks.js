@@ -10,9 +10,6 @@ const SavedBooks = () => {
   const {loading, data } = useQuery(GET_ME); 
   const userData = data?.me || [];
 
-  console.log(`I am the userdata, why am I undefined? ${userData} ????`)
-
-
   const [deleteBook, {error}] = useMutation(REMOVE_BOOK);
   // const userDataLength = Object.keys(userData).length;
   // create function that accepts the book's mongo _id value as param and deletes the book from the database
@@ -27,7 +24,6 @@ const SavedBooks = () => {
       const { data } = await deleteBook({
         variables: { bookId: bookId },
       });
-
 
       removeBookId(bookId);
     } catch (err) {

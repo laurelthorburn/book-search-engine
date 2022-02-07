@@ -4,63 +4,64 @@ const { signToken } = require('../utils/auth');
 
 const resolvers = {
   Query: {
-//getSingleUser
     me: async (parent, args, context) => {
       if (context.user) {
-        const userData = await User.findOne({ _id: context.user._id }).select(
-          "-__v -password"
-        );
+        const userData = await User.findOne({ _id: context.user._id }).select('-__v -password');
         return userData;
       }
-      throw new AuthenticationError("Apologies but you are not logged in");
+      throw new AuthenticationError('You need to be logged in!');
     },
   },
 
   Mutation: {
     //createUser
-    createUser: async (parent, { username, email, password }) => {
-      const user = await User.create({ username, email, password });
+    createUser: async (parent, args) => {
+      const user = await User.create(args);
       const token = signToken(user);
       return { token, user };
     },
 
     //saveBook
     saveBook: async (parent, { bookData }, context) => {
-      if(context.user){
-      return await User.findOneAndUpdate(
-        { _id: context.user._id },
-        { $addToSet: { savedBooks: bookData }},
-        { new: true, runValidators: true}
-      );
+      if (context.user) {
+        const updatedUser = await User.findByIdAndUpdate(
+          { _id: context.user._id },
+          { $push: { savedBooks: bookData }},
+          { new: true }
+        );
+        return updatedUser;
       }
+      throw new AuthenticationError('You need to be logged in!');
     },
 
     //deleteBook
     deleteBook: async (parent, { bookId }, context) => {
-      if(context.user){
-      return await User.findOneAndUpdate(
-        { _id: context.user._id },
-        { $pull: { savedBooks: { bookId: bookId } } },
-        { new: true }
-      );
+      if (context.user) {
+        const updatedUser = await User.findByIdAndUpdate(
+          { _id: context.user._id },
+          { $pull: { savedBooks: { bookId }}},
+          { new: true }
+        );
+        return updatedUser;
       }
+      throw new AuthenticationError('You need to be logged in!');
     },
 
-//login user
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
 
       if (!user) {
-        throw new AuthenticationError('No user found!');
+        throw new AuthenticationError('No user found');
       }
 
       const correctPw = await user.isCorrectPassword(password);
 
       if (!correctPw) {
-        throw new AuthenticationError('Nope, try again');
+        throw new AuthenticationError('Incorrect credentials');
       }
 
       const token = signToken(user);
+
       return { token, user };
     },
 

@@ -1,7 +1,7 @@
 {
   "name": "book-search-engine",
   "version": "1.0.0",
-  "description": "Laurel's Book Search Engine failure",
+  "description": "",
   "main": "server/server.js",
   "scripts": {
     "start": "node server/server.js",
@@ -15,5 +15,8 @@
   "devDependencies": {
     "concurrently": "^5.1.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "apollo-client": "^2.6.10",
+    "graphql": "^15.5.2"
+  }
 }
