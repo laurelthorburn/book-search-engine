@@ -4,11 +4,11 @@ import { useQuery, useMutation } from '@apollo/client';
 import Auth from '../utils/auth';
 import { GET_ME } from '../utils/queries';
 import { REMOVE_BOOK } from '../utils/mutations';
-import { removeBookId, saveBookIds } from '../utils/localStorage';
+import { removeBookId } from '../utils/localStorage';
 
 const SavedBooks = () => {
   const {loading, data } = useQuery(GET_ME); 
-  const userData = data?.me || [];
+  const userData = data?.me || {};
 
   const [deleteBook, {error}] = useMutation(REMOVE_BOOK);
   // const userDataLength = Object.keys(userData).length;
@@ -22,7 +22,7 @@ const SavedBooks = () => {
 
     try {
       const { data } = await deleteBook({
-        variables: { bookId: bookId },
+        variables: { bookId },
       });
 
       removeBookId(bookId);
