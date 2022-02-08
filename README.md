@@ -121,10 +121,10 @@ No tests at this time
 
   <a name="picsection"></a>
   ## Screenshots
-  ![Screenshot of Main Page](./media/screenshot1.png)
-  ![Screenshot of Sign In Page](./media/screenshot2.png)
-  ![Screenshot of Search Bar](./media/screenshot3.png)
-  ![Screenshot of Saved Books](./media/screenshot4.png)
+  ![Screenshot of Main Page](/media/screenshot1.png)
+  ![Screenshot of Sign In Page](/media/screenshot2.png)
+  ![Screenshot of Search Bar](/media/screenshot3.png)
+  ![Screenshot of Saved Books](/media/screenshot4.png)
 
 
   <a name="linksection"></a>
