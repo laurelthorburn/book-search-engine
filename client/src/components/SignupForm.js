@@ -16,7 +16,6 @@ const SignupForm = () => {
   //do i need all these things, what all do i need? why can't i console log them WAH
 const [createUser, { data, error }] = useMutation(ADD_USER);
 
-console.log(data);
 
 
 useEffect(() => {
@@ -43,14 +42,6 @@ useEffect(() => {
         variables: { ...userFormData },
       });
 
-      console.log(data);
-
-      // if (!response.ok) {
-      //   throw new Error('something went wrong!');
-      // }
-
-      // const { token, user } = await response.json();
-      // console.log(user);
       Auth.login(data.createUser.token);
     } catch (err) {
       console.error(err);
