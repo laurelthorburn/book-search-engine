@@ -121,15 +121,16 @@ No tests at this time
 
   <a name="picsection"></a>
   ## Screenshots
-  ![Screenshot of Main Page](./src/media/screenshot1.png)
-  ![Screenshot of Sign Up Page](./src/media/screenshot2.png)
-  ![Screenshot of My Page](./src/media/screenshot3.png)
+  ![Screenshot of Main Page](./media/screenshot1.png)
+  ![Screenshot of Sign In Page](./media/screenshot2.png)
+  ![Screenshot of Search Bar](./media/screenshot3.png)
+  ![Screenshot of Saved Books](./media/screenshot4.png)
 
 
   <a name="linksection"></a>
   ## Links
 
-  Deployed Heroku Site: Coming soon...
+  Deployed Heroku Site: https://laurels-book-search-engine.herokuapp.com/
   
   Github Site: https://github.com/laurelthorburn/book-search-engine
 
